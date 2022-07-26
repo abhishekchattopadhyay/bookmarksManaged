@@ -79,12 +79,12 @@ public class UT
    {
       DB db = new DB();
       assertTrue(db.getRecords().isEmpty());
-      assertTrue(db.getTokenMap().isEmpty());
 
       db.setRecords(recordCreator());
+      String quote = null;
       assertTrue(db.getRecords().size() == 100);
       Record r = new Record("bookname_9", "authorname_4", null, null,
-            null, null);
+            quote, null);
       LOG.debug("Starting UT: dbTest");
       List<Record> res = db.search(r);
       assertTrue(res.size() > 0);

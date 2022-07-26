@@ -13,13 +13,11 @@ import org.slf4j.LoggerFactory;
 public class DB
 {
    private static final Logger LOG = LoggerFactory.getLogger(DB.class);
-   private Map<Tokens, List<Record>> tokenMap;
    private List<Record> records;
 
    public DB()
    {
       super();
-      this.tokenMap = new HashMap<>();
       this.records = new LinkedList<>();
       LOG.debug("starting with {} records", records.size());
    }
@@ -101,16 +99,6 @@ public class DB
          for (var sr: searchResult)
             LOG.info(sr.toString());
       return searchResult;
-   }
-
-   public Map<Tokens, List<Record>> getTokenMap()
-   {
-      return tokenMap;
-   }
-
-   public void setTokenMap(Map<Tokens, List<Record>> tokenMap)
-   {
-      this.tokenMap = tokenMap;
    }
 
    public List<Record> getRecords()

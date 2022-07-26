@@ -16,7 +16,7 @@ public class Record
 {
    private static final Logger LOG = LoggerFactory.getLogger(Record.class);
 
-   private final String REGEX = "\\s+|,\\s*|\\.\\s*";
+   
    // UUID of this record
    private final UUID id;
    // name of the book
@@ -77,7 +77,7 @@ public class Record
       }
 
       LOG.debug("Incoming String is {}", str);
-      List<String> returnList = Arrays.asList(str.split(REGEX, 0));
+      List<String> returnList = Arrays.asList(str.split(Util.REGEX, 0));
       LOG.debug("POST regex split tokens are {}", returnList);
       List<String> temp = Util.toLower(returnList);
       LOG.debug("lower casing it {}", temp);
