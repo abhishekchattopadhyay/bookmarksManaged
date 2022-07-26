@@ -16,7 +16,6 @@ public class Record
 {
    private static final Logger LOG = LoggerFactory.getLogger(Record.class);
 
-   
    // UUID of this record
    private final UUID id;
    // name of the book
