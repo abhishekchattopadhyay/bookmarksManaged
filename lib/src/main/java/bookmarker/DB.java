@@ -171,7 +171,7 @@ public class DB
       records.add(r); 
       try
       {
-         LOG.error(Util.dumpJson(r, true));
+         LOG.debug(Util.dumpJson(r, true));
       }
       catch (JsonProcessingException e)
       {

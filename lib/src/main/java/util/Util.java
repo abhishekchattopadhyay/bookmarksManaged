@@ -1,14 +1,12 @@
 package util;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.PrettyPrinter;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -66,5 +64,20 @@ public class Util
 
       writer.writeValue(Paths.get(path).toFile(), o);
    }
+   
+   public static void  readJsonFile(String path, Object o, List<Object> lo)
+   {
+      try {
+         // create object mapper instance
+         ObjectMapper mapper = new ObjectMapper();
+         // convert JSON string to object
+         lo.add(mapper.readValue(Paths.get(path).toFile(), o.getClass()));
+         Arrays.asList(mapper.readValue(Paths.get(path).toFile(), o.getClass()));
+
+     } catch (Exception ex) {
+         ex.printStackTrace();
+     }
+   }
+   // https://attacomsian.com/blog/jackson-read-write-json
 
 }

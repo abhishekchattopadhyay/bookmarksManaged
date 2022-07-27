@@ -198,7 +198,8 @@ public class UT
             "   realm is willing to be fiscally responsible.  Services provided past",
             "   the expiration of the Authorization-Lifetime and Auth-Grace-Period",
             "   AVPs are the responsibility of the access device.  Of course, the",
-            "   actual cost of services rendered is clearly outside the scope of the", "   protocol.",
+            "   actual cost of services rendered is clearly outside the scope of the", 
+            "   protocol.",
             "   An access device that does not expect to send a re-authorization or a",
             "   session termination request to the server MAY include the Auth-",
             "   Session-State AVP with the value set to NO_STATE_MAINTAINED as a hint",
@@ -235,7 +236,7 @@ public class UT
       String authorName = "authorName_";
       String SuggestedBy = "suggestorName_";
       String date = "01-01-2000";
-      for (int i = 0; i < 100; ++i)
+      for (int i = 0; i < 110; ++i)
       {
          output.add(
                new Record(bookName + i % 10, authorName + i % 5, i, date, quote[i], SuggestedBy + i % 20));

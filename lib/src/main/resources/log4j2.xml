@@ -7,10 +7,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="bookmarker" level="info" additivity="false">
+        <Logger name="bookmarker" level="debug" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Root level="error">
+        <Root level="debug">
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>

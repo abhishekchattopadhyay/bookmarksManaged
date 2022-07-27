@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import util.Util;
@@ -17,12 +18,15 @@ import util.Util;
 public class Record
 {
    private static final Logger LOG = LoggerFactory.getLogger(Record.class);
+   private final short MIN_STR_LEN_FOR_TOKENIZATION = 3;
 
    // UUID of this record
    private final UUID id;
    // name of the book
+   @JsonProperty("book")
    private String bookName;
    // page number
+   @JsonProperty("page")
    private Integer pageNumber;
    // date when this record was created
    private String date;
@@ -41,11 +45,12 @@ public class Record
       this.id = UUID.randomUUID();
       this.bookName = bookName;
       this.author = author;
-      this.pageNumber = pageNumber;
+      this.pageNumber = pageNumber;//==null?-1:pageNumber;
       this.date = date;
       this.quote = quote;
       this.suggestedBy = suggestedBy;
       this.tokens = new HashMap<>();
+      LOG.debug("book: {},author: {}, page: {}, date: {}, quote:{}", bookName,author,pageNumber,date,quote );
       tokenize();
    }
 
@@ -71,7 +76,7 @@ public class Record
             // no tokens will be added
             break;
       }
-      if (str == null || str.isBlank() || str.isEmpty() || str.length() < 3)
+      if (str == null || str.isBlank() || str.isEmpty() || str.length() < MIN_STR_LEN_FOR_TOKENIZATION)
       {
          LOG.debug("null/untokenizable string skipped\n");
          return null;
@@ -176,7 +181,7 @@ public class Record
    {
       try
       {
-         return (" tokens: " + Util.dumpJson(this, false));
+         return (Util.dumpJson(this, false));
       }
       catch (JsonProcessingException e)
       {
