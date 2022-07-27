@@ -8,6 +8,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import util.Util;
+
 public class DB
 {
    private static final Logger LOG = LoggerFactory.getLogger(DB.class);
@@ -164,7 +168,18 @@ public class DB
 
    public synchronized void insert(Record r)
    {
-      records.add(r);
+      records.add(r); 
+      try
+      {
+         LOG.error(Util.dumpJson(r, true));
+      }
+      catch (JsonProcessingException e)
+      {
+         // TODO implement catch JsonProcessingException
+         LOG.error("Unexpected Exception", e);
+         throw new UnsupportedOperationException("Unexpected Exception", e);
+         
+      }
    }
-
+   
 }

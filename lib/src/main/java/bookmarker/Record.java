@@ -10,6 +10,8 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import util.Util;
 
 public class Record
@@ -36,7 +38,7 @@ public class Record
    public Record(String bookName, String author, Integer pageNumber, String date, String quote,
          String suggestedBy)
    {
-      this.id = new UUID(0, 0);
+      this.id = UUID.randomUUID();
       this.bookName = bookName;
       this.author = author;
       this.pageNumber = pageNumber;
@@ -102,11 +104,6 @@ public class Record
    public HashSet<String> getTokenByType(TokenType t)
    {
       return tokens.get(t);
-   }
-
-   public Map<TokenType, HashSet<String>> getTokens()
-   {
-      return tokens;
    }
 
    public String getBookName()
@@ -177,6 +174,15 @@ public class Record
    @Override
    public String toString()
    {
-      return (" tokens: " + getTokens().values());
+      try
+      {
+         return (" tokens: " + Util.dumpJson(this, false));
+      }
+      catch (JsonProcessingException e)
+      {
+         // TODO implement catch JsonProcessingException
+         LOG.error("Unexpected Exception", e);
+         throw new UnsupportedOperationException("Unexpected Exception", e);
+      }
    }
 }
